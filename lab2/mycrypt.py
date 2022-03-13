@@ -1,5 +1,4 @@
 import codecs
-import re
 
 def encode(s):
     if not isinstance(s,str):
