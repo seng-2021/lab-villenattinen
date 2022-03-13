@@ -8,6 +8,7 @@ def encode(s):
     digitmapping = dict(zip('1234567890!"#€%&/()=','!"#€%&/()=1234567890'))
     if len(s) > 1000:
         raise ValueError
+    s = s.ljust(1000, "a")
     for c in s:
         if c.isalpha() and c.isascii():
             if c.islower():
@@ -15,12 +16,10 @@ def encode(s):
             # Rot13 the character for maximum security
             crypted+=codecs.encode(c,'rot13')
         elif c in digitmapping:
-          crypted+=digitmapping[c]
+            crypted+=digitmapping[c]
         else:
             raise ValueError
-    while len(crypted) < 1000:
-        crypted+="0"
-    return crypted[0:len(s)]
+    return crypted[0:origlen]
 
 def decode(s):
     return encode(s)
