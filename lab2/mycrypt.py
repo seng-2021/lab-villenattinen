@@ -1,4 +1,5 @@
 import codecs
+import re
 
 def encode(s):
     if not isinstance(s,str):
@@ -9,7 +10,7 @@ def encode(s):
     if len(s) > 1000:
         raise ValueError
     for c in s:
-        if c.isalpha():
+        if c.isalpha() and c.isascii():
             if c.islower():
                 c=c.upper()
             # Rot13 the character for maximum security
@@ -18,7 +19,9 @@ def encode(s):
           crypted+=digitmapping[c]
         else:
             raise ValueError
-    return crypted
+    while len(crypted) < 1000:
+        crypted+="0"
+    return crypted[0:len(s)]
 
 def decode(s):
     return encode(s)
