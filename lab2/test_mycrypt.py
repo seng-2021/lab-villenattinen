@@ -41,18 +41,12 @@ def test_invalid_char(invalid_input):
     with pytest.raises(ValueError):
         mycrypt.encode(invalid_input)
 
-@pytest.mark.parametrize("invalid_input", [])
-def test_invalid_types(invalid_input):
-    '''Invalid parameter types should raise TypeError'''
-    with pytest.raises(TypeError):
-        mycrypt.encode(invalid_input)
-
 @pytest.mark.parametrize("invalid_input", [123, None])
 def test_invalid_types(invalid_input):
     '''Invalid parameter types should raise TypeError'''
     with pytest.raises(TypeError):
         mycrypt.encode(invalid_input)
-        
+    
 @pytest.mark.parametrize("invalid_length", ["a"*1001, ""])
 def test_invalid_length(invalid_length):
     '''Invalid parameter lengths should raise ValueError'''
